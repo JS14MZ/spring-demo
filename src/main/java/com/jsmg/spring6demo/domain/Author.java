@@ -1,12 +1,11 @@
 package com.jsmg.spring6demo.domain;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
+import jakarta.persistence.*;
 
+import java.util.HashSet;
 import java.util.Set;
 
+@Entity
 public class Author {
 
     @Id
@@ -16,7 +15,15 @@ public class Author {
     private String lastName;
 
     @ManyToMany(mappedBy = "authors")
-    private Set<Book> books;
+    private Set<Book> books = new HashSet<>();
+
+    public Set<Book> getBooks() {
+        return books;
+    }
+
+    public void setBooks(Set<Book> books) {
+        this.books = books;
+    }
 
     public Long getId() {
         return id;
@@ -45,10 +52,10 @@ public class Author {
     @Override
     public String toString() {
         return "Author{" +
-                "books=" + books +
+                "id=" + id +
                 ", lastName='" + lastName + '\'' +
                 ", firstName='" + firstName + '\'' +
-                ", id=" + id +
+                ", books=" + books +
                 '}';
     }
 
