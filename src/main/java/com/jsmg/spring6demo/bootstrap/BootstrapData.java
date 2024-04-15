@@ -28,13 +28,13 @@ public class BootstrapData implements CommandLineRunner {
         a1.setFirstName("Eric");
         a1.setLastName("Evans");
 
-        Book b1 = new Book();
-        b1.setTitle("Domain Driven Design");
-        b1.setIsbn("123456");
-
         Author a2 = new Author();
         a2.setFirstName("Rod");
         a2.setLastName("Johnson");
+
+        Book b1 = new Book();
+        b1.setTitle("Domain Driven Design");
+        b1.setIsbn("123456");
 
         Book b2 = new Book();
         b2.setTitle("J2EE Development without EJB");
@@ -55,11 +55,13 @@ public class BootstrapData implements CommandLineRunner {
 
         a1Saved.getBooks().add(b1Saved);
         a2Saved.getBooks().add(b2Saved);
+        b1Saved.setPublisher(p1Saved);
+        b2Saved.setPublisher(p1Saved);
 
         authorRepository.save(a1Saved);
         authorRepository.save(a2Saved);
-
-        publisherRepository.save(p1Saved);
+        bookRepository.save(b1Saved);
+        bookRepository.save(b2Saved);
 
         System.out.println("In Bootstrap");
         System.out.println("Author Count: " + authorRepository.count());
